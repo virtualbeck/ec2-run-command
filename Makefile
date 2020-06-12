@@ -20,6 +20,7 @@ test:
 		--subnet-filter "tag:Type=private" \
 		--security-group-filter "group-name=qa_private" \
 		--type t2.micro \
+		--root-ebs-size 10 \
 		echo "Hello world"
 
 publish:
