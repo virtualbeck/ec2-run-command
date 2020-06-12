@@ -29,6 +29,7 @@ type InstanceOptions struct {
 	Count                int
 	SSHKey               string
 	SSHPort              int
+	RootEBSSize          int
 	User                 string
 	IdentityFile         string
 	Tags                 []string
@@ -129,6 +130,7 @@ func (opts *InstanceOptions) Instances() (instances []*Instance, err error) {
 		instance.Type = &opts.Type
 		instance.NoTermination = &opts.NoTermination
 		instance.SSHPort = &opts.SSHPort
+		instance.RootEBSSize = &opts.RootEBSSize
 		instance.ExitCode = aws.Int(-1)
 
 		if i > 1 {

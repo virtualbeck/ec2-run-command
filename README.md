@@ -36,6 +36,7 @@ Flags:
       --instance-profile string             Role to attach to your instance
       --no-terminate                        Do not terminate the instance upon completion (default true)
       --no-wait-cloud-init                  Do not wait for user-data to complete before invoking entrypoint and command (default true)
+      --root-ebs-size int                   (optional) Root EBS Volume size in GB. If omitted, will default to 8
       --security-group stringArray          Security group name
       --security-group-filter stringArray   Filters for your Security Groups. Syntax: Name=string,Values=string,string ...
       --ssh-key string                      (optional) use this AWS SSH key. If omitted, an ephemeral key will be created

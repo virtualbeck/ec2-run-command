@@ -40,6 +40,7 @@ type Instance struct {
 	IamInstanceProfile *string
 	sshConfig          *ssh.ClientConfig
 	SSHPort            *int
+	RootEBSSize        *int
 	KeyName            *string
 	Tags               *map[string]string
 	Type               *string
@@ -79,6 +80,17 @@ func (instance *Instance) StartInstance() (err error) {
 		MinCount:     aws.Int64(1),
 		UserData:     instance.UserData,
 
+		BlockDeviceMappings: []*ec2.BlockDeviceMapping{
+			&ec2.BlockDeviceMapping{
+				DeviceName:              aws.String("/dev/xvda"), //assumes amazon linux OS
+				Ebs: &ec2.EbsBlockDevice{
+					DeleteOnTermination: aws.Bool(true),
+					VolumeSize:          instance.RootEBSSize,
+					VolumeType:          aws.String("gp2"),
+				},			
+			},
+		},
+		
 		NetworkInterfaces: []*ec2.InstanceNetworkInterfaceSpecification{
 			&ec2.InstanceNetworkInterfaceSpecification{
 				DeviceIndex:              aws.Int64(0),
@@ -353,6 +365,10 @@ func (instance *Instance) String() string {
 
 	if instance.SSHPort != nil {
 		s = s + fmt.Sprintf("SSHPort: %d\n", *instance.SSHPort)
+	}
+
+	if instance.RootEBSSize != nil {
+		s = s + fmt.Sprintf("RootEBSSize: %d\n", *instance.RootEBSSize)
 	}
 
 	if instance.KeyName != nil {

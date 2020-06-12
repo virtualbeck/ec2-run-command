@@ -35,6 +35,7 @@ func init() {
 
 	run.PersistentFlags().StringVar(&opts.SSHKey, "ssh-key", "", "(optional) use this AWS SSH key. If omitted, an ephemeral key will be created")
 	run.PersistentFlags().IntVar(&opts.SSHPort, "ssh-port", 22, "SSH port")
+	run.PersistentFlags().IntVar(&opts.RootEBSSize, "root-ebs-size", 8, "(optional) Root EBS Volume size in GB. If omitted, will default to 8")
 	run.PersistentFlags().StringVar(&opts.User, "user", "ec2-user", "SSH user to connect to your instance with")
 	run.PersistentFlags().StringVarP(&opts.IdentityFile, "identify-file", "i", "", "If using ssh-key, pass in the identitiy file")
 
