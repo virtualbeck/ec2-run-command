@@ -29,7 +29,7 @@ type InstanceOptions struct {
 	Count                int
 	SSHKey               string
 	SSHPort              int
-	RootEBSSize          int
+	RootEBSSize          int64
 	User                 string
 	IdentityFile         string
 	Tags                 []string
